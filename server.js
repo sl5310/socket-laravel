@@ -2,12 +2,14 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var axios = require('axios');
+const PORT = 3000;
 
-server.listen(3000, function(){
+server.listen(PORT, function(){
   console.log('Listening on Port 3000');
 });
 
 io.on('connection', function(socket) {
+
   socket.on('chat.message', function(message) {
     const isProhibited = isSensitiveWords(message);
     if (!isProhibited) {

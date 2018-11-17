@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Message;
 use Illuminate\Http\Request;
 
-
 /**
  * Class SocketController
  * @package App\Http\Controllers
@@ -18,11 +17,12 @@ class SocketController extends Controller
      */
     public function send(Request $request)
     {
-        Message::create(['message' => $request->get('message')]);
+        $message = $request->get('message');
+        Message::create(['message' => $message]);
         return response()->json([
             'success' => true,
             'code' => 200,
-            'message' => $request->get('message')
+            'message' => $message
         ], 200);
     }
 }
